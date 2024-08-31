@@ -6,9 +6,7 @@ use sqlx::postgres::PgPoolOptions;
 use sqlx::postgres::PgPool;
 use futures::TryStreamExt;
 
-use swpc_psql::{
-    swpc::{filtered_solar_wind_data, payload_to_solarwind, solar_wind_payload, SolarWind}
-};
+use swpc_psql::swpc::{filtered_solar_wind_data, payload_to_solarwind, solar_wind_payload, SolarWind};
 
 async fn insert_solar_wind(pool: &PgPool, solar_wind: Vec<SolarWind>) -> Result<(), sqlx::Error> {
     for sw in solar_wind {
@@ -52,11 +50,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .await
     {
         Ok(pool) => {
-            println!("✅Connection to the database is successful!");
+            println!("Connection to the database is successful!");
             pool
         }
         Err(err) => {
-            println!("🔥 Failed to connect to the database: {:?}", err);
+            println!("Failed to connect to the database: {:?}", err);
             std::process::exit(1);
         }
     };
